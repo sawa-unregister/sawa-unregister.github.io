@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1.0,maximum-scale=1.0,
+    user-scalable=no"
+    />
+    <title>Document</title>
+    <style>
+      #btn,
+      #btn2 {
+        margin: 100px auto;
+        width: 200px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="btn">test sawaksa_login</div>
+    <br />
+    <div id="btn2">test sawaksa_login_event</div>
+    <br />
+    <div id="data1"></div>
+
+    <script>
+      function report(eventName, fields = {}) {
+        const json = fields
+
+        window.location.href = `sawaludo://sawaksa_login_event/?eventName=${eventName}&jsonData=${btoa(
+          encodeURIComponent(JSON.stringify(json))
+        )}`
+      }
+
+      btn.addEventListener('click', () => {
+        // todo
+        const source = 'sawaksa_fb'
+        const o = {
+          session_key: 'testskey_2003009943',
+          uid: 2003009943,
+          icon_verify: 'https://oss-pk-arab.badambiz.com/pk_Avatar_default1@2x_1623916507.png',
+        }
+        const v = encodeURIComponent(JSON.stringify(o))
+        window.location.href = `sawaludo://sawaksa_login/?sawaksa_acount=${v}&source=${source}`
+      })
+
+      btn2.addEventListener('click', () => {
+        report('h5_loginpage_enpower_no_account_pop_show', {
+          session_key: 'testskey_2003009943',
+          uid: 2003009943,
+        })
+      })
+
+      function showData() {
+        const u = new URL(location.href)
+        const data = u.searchParams.get('data')
+
+        data1.innerText = data
+      }
+
+      showData()
+    </script>
+  </body>
+</html>
